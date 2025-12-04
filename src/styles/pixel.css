@@ -1,0 +1,470 @@
+/* Pixel Art 像素風格樣式 */
+
+/* 引入像素字體 */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* CSS 變數 - 8-bit 配色 */
+:root {
+  /* 主要色彩 */
+  --color-bg: #1a1a2e;
+  --color-bg-secondary: #16213e;
+  --color-primary: #e94560;
+  --color-secondary: #0f3460;
+  --color-accent: #00fff5;
+  --color-success: #00d26a;
+  --color-warning: #ffcc00;
+  --color-error: #ff4757;
+
+  /* 文字色彩 */
+  --color-text: #eaeaea;
+  --color-text-dim: #8b8b8b;
+
+  /* 像素邊框 */
+  --pixel-border: 4px solid #eaeaea;
+  --pixel-shadow: 4px 4px 0px #000;
+
+  /* 字體 */
+  --font-pixel: 'Press Start 2P', cursive;
+
+  /* 間距 */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+}
+
+/* 全局樣式 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+  width: 100%;
+  background-color: var(--color-bg);
+}
+
+body {
+  font-family: var(--font-pixel);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* CRT 掃描線效果 */
+.scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  background: repeating-linear-gradient(0deg,
+      rgba(0, 0, 0, 0.15),
+      rgba(0, 0, 0, 0.15) 1px,
+      transparent 1px,
+      transparent 2px);
+}
+
+/* 像素邊框容器 */
+.pixel-box {
+  background: var(--color-bg-secondary);
+  border: var(--pixel-border);
+  box-shadow: var(--pixel-shadow);
+  padding: var(--spacing-lg);
+  image-rendering: pixelated;
+}
+
+/* 像素按鈕 */
+.pixel-btn {
+  font-family: var(--font-pixel);
+  font-size: 12px;
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: var(--color-primary);
+  color: var(--color-text);
+  border: 4px solid #fff;
+  box-shadow: 4px 4px 0px #000;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.1s;
+  position: relative;
+}
+
+.pixel-btn:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px #000;
+}
+
+.pixel-btn:active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
+.pixel-btn:disabled {
+  background: var(--color-text-dim);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.pixel-btn--secondary {
+  background: var(--color-secondary);
+}
+
+.pixel-btn--success {
+  background: var(--color-success);
+}
+
+.pixel-btn--accent {
+  background: var(--color-accent);
+  color: #000;
+}
+
+/* 像素輸入框 */
+.pixel-input {
+  font-family: var(--font-pixel);
+  font-size: 14px;
+  padding: var(--spacing-md);
+  background: #000;
+  color: var(--color-accent);
+  border: 4px solid var(--color-text);
+  box-shadow: inset 0 0 10px rgba(0, 255, 245, 0.2);
+  outline: none;
+  width: 100%;
+  text-align: center;
+}
+
+.pixel-input::placeholder {
+  color: var(--color-text-dim);
+}
+
+.pixel-input:focus {
+  border-color: var(--color-accent);
+  box-shadow: inset 0 0 20px rgba(0, 255, 245, 0.4), 0 0 10px rgba(0, 255, 245, 0.5);
+}
+
+/* 標題樣式 */
+.pixel-title {
+  font-family: var(--font-pixel);
+  font-size: 24px;
+  color: var(--color-primary);
+  text-shadow: 4px 4px 0px #000, -1px -1px 0px #fff;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.pixel-title--small {
+  font-size: 16px;
+}
+
+.pixel-title--large {
+  font-size: 32px;
+}
+
+/* 文字動畫 - 閃爍 */
+@keyframes blink {
+
+  0%,
+  50% {
+    opacity: 1;
+  }
+
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.blink {
+  animation: blink 1s infinite;
+}
+
+/* 文字動畫 - 彩虹 */
+@keyframes rainbow {
+  0% {
+    color: #ff0000;
+  }
+
+  16% {
+    color: #ff8800;
+  }
+
+  33% {
+    color: #ffff00;
+  }
+
+  50% {
+    color: #00ff00;
+  }
+
+  66% {
+    color: #00ffff;
+  }
+
+  83% {
+    color: #8800ff;
+  }
+
+  100% {
+    color: #ff0000;
+  }
+}
+
+.rainbow {
+  animation: rainbow 2s linear infinite;
+}
+
+/* 進度條 */
+.pixel-progress {
+  width: 100%;
+  height: 24px;
+  background: #000;
+  border: 4px solid var(--color-text);
+  box-shadow: var(--pixel-shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.pixel-progress__bar {
+  height: 100%;
+  background: linear-gradient(90deg,
+      var(--color-success) 0%,
+      var(--color-accent) 100%);
+  transition: width 0.3s ease;
+}
+
+.pixel-progress__text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 10px;
+  color: #fff;
+  text-shadow: 1px 1px 0px #000;
+  z-index: 1;
+}
+
+/* 選項按鈕 */
+.option-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font-family: var(--font-pixel);
+  font-size: 11px;
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+  background: var(--color-secondary);
+  color: var(--color-text);
+  border: 3px solid var(--color-text);
+  box-shadow: 3px 3px 0px #000;
+  cursor: pointer;
+  transition: all 0.1s;
+  line-height: 1.6;
+}
+
+.option-btn:hover:not(:disabled) {
+  background: var(--color-primary);
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px #000;
+}
+
+.option-btn--selected {
+  background: var(--color-accent);
+  color: #000;
+  border-color: #fff;
+}
+
+.option-btn--correct {
+  background: var(--color-success);
+  border-color: #fff;
+}
+
+.option-btn--wrong {
+  background: var(--color-error);
+  border-color: #fff;
+}
+
+.option-btn:disabled {
+  cursor: not-allowed;
+}
+
+/* 頭像容器 */
+.avatar-container {
+  width: 120px;
+  height: 120px;
+  border: 4px solid var(--color-text);
+  box-shadow: var(--pixel-shadow);
+  background: var(--color-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  image-rendering: pixelated;
+}
+
+.avatar-container img {
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+}
+
+/* 卡片 */
+.pixel-card {
+  background: var(--color-bg-secondary);
+  border: 4px solid var(--color-text);
+  box-shadow: var(--pixel-shadow);
+  padding: var(--spacing-lg);
+}
+
+/* 關卡指示器 */
+.level-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  font-size: 14px;
+  color: var(--color-warning);
+  text-shadow: 2px 2px 0px #000;
+}
+
+/* 分數顯示 */
+.score-display {
+  font-size: 48px;
+  color: var(--color-accent);
+  text-shadow: 4px 4px 0px var(--color-primary), 8px 8px 0px #000;
+  text-align: center;
+}
+
+/* 結果狀態 */
+.result-pass {
+  color: var(--color-success);
+  text-shadow: 4px 4px 0px #000;
+}
+
+.result-fail {
+  color: var(--color-error);
+  text-shadow: 4px 4px 0px #000;
+}
+
+/* 載入動畫 */
+@keyframes loading {
+  0% {
+    content: "Loading";
+  }
+
+  25% {
+    content: "Loading.";
+  }
+
+  50% {
+    content: "Loading..";
+  }
+
+  75% {
+    content: "Loading...";
+  }
+}
+
+.loading::after {
+  content: "Loading";
+  animation: loading 1.5s infinite;
+}
+
+/* 淡入動畫 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+/* 抖動動畫 */
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-5px);
+  }
+
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+.shake {
+  animation: shake 0.3s ease;
+}
+
+/* 彈跳動畫 */
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.bounce {
+  animation: bounce 0.5s ease infinite;
+}
+
+/* 螢幕容器 */
+.screen-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-lg);
+  padding-bottom: 60px;
+  gap: var(--spacing-lg);
+  background-color: var(--color-bg);
+}
+
+/* 響應式調整 */
+@media (max-width: 768px) {
+  .pixel-title {
+    font-size: 16px;
+  }
+
+  .pixel-title--large {
+    font-size: 20px;
+  }
+
+  .pixel-box {
+    padding: var(--spacing-md);
+  }
+
+  .option-btn {
+    font-size: 10px;
+    padding: var(--spacing-sm);
+  }
+
+  .avatar-container {
+    width: 80px;
+    height: 80px;
+  }
+}
